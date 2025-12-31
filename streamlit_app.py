@@ -448,19 +448,18 @@ def page_define_techs():
         """)
     
     # Number of technologies selector
-st.subheader("Number of Technologies")
+    st.subheader("Number of Technologies")
 
-num_tech = st.slider(
-    "How many technologies do you want to assess?",
-    min_value=1,
-    max_value=min(MAX_TECH, len(tech_df)),
-    value=st.session_state['num_tech'],
-    help="You can assess between 1 and 20 technologies"
-)
+    num_tech = st.slider(
+        "How many technologies do you want to assess?",
+        min_value=1,
+        max_value=min(MAX_TECH, len(tech_df)),
+        value=st.session_state['num_tech'],
+        help="You can assess between 1 and 20 technologies"
+    )
 
-st.session_state['num_tech'] = num_tech
-
-st.divider()
+    st.session_state['num_tech'] = num_tech
+    st.divider()
 
 
     
