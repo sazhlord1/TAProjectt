@@ -449,6 +449,7 @@ def page_define_techs():
     
     # Number of technologies selector
 st.subheader("Number of Technologies")
+
 num_tech = st.slider(
     "How many technologies do you want to assess?",
     min_value=1,
@@ -460,6 +461,7 @@ num_tech = st.slider(
 st.session_state['num_tech'] = num_tech
 
 st.divider()
+
 
     
     # Technology definition inputs
