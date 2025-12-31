@@ -68,7 +68,7 @@ def ensure_state():
     """Initialize session_state with all required data structures."""
     if 'initialized' not in st.session_state:
         st.session_state['initialized'] = True
-        st.session_state['num_tech'] = 3
+        st.session_state['num_tech'] = 5
         
         # Technology metadata
         st.session_state['tech_names'] = [f"Technology {i+1}" for i in range(MAX_TECH)]
@@ -391,22 +391,9 @@ def normalize_weights(w_m, w_a, w_c, w_e):
     return w_m / total, w_a / total, w_c / total, w_e / total
 
 
-@st.cache_data
-def load_technologies():
-    return pd.read_csv("Technologies.csv")
-
-tech_df = load_technologies()
-
 # =============================================================================
 # PAGE FUNCTIONS
 # =============================================================================
-if "techs_initialized" not in st.session_state:
-    st.session_state["techs_initialized"] = True
-
-    for i in range(len(tech_df)):
-        st.session_state["tech_names"][i] = tech_df.iloc[i]["Technology"]
-        st.session_state["tech_sectors"][i] = tech_df.iloc[i]["Sector"]
-        st.session_state["tech_descs"][i] = tech_df.iloc[i]["Description"]
 
 def page_define_techs():
     """Page 1: Define Technologies"""
@@ -449,19 +436,16 @@ def page_define_techs():
     
     # Number of technologies selector
     st.subheader("Number of Technologies")
-
     num_tech = st.slider(
         "How many technologies do you want to assess?",
         min_value=1,
-        max_value=min(MAX_TECH, len(tech_df)),
+        max_value=MAX_TECH,
         value=st.session_state['num_tech'],
         help="You can assess between 1 and 20 technologies"
     )
-
     st.session_state['num_tech'] = num_tech
+    
     st.divider()
-
-
     
     # Technology definition inputs
     st.subheader("Define Each Technology")
@@ -2091,4 +2075,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
